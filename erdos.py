@@ -8,7 +8,6 @@ class No:
         self.co_autores = set()
         self.nome = nome
         self.numero = numero
-        self.pai = None
 
     def update_co_autores(self, nos):
         self.co_autores.update(nos)
@@ -18,8 +17,8 @@ class No:
         for no in nos:
             if self.numero < no.numero:
                 # Eu estou mais perto de Erdos que o outro nó,
-                # sou o pai dele
-                no.pai = self
+                # tenho autoridade para determinar o número dele.
+                # Ele está na posição mais próxima possível de mim.
                 no.numero = self.numero + 1
                 no.perfilhar_nos_em(no.co_autores)
 

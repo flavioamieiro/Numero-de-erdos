@@ -102,5 +102,64 @@ class TestErdos(unittest.TestCase):
         self.assertEqual(erdos.numero_do('Magdalena'), 2)
         self.assertEqual(erdos.numero_do('Luiza'), 1)
 
+    def teste_boladao(self):
+        livros = [
+            ['Erdos', '1'],
+            ['1', '2'],
+            ['2', '3'],
+            ['3', '4'],
+            ['4', '5'],
+            ['5', '6'],
+            ['6', '7'],
+            ['7', '8'],
+        ]
+        erdos = Erdos(livros)
+        self.assertEqual(erdos.numero_do('Erdos'), 0)
+        self.assertEqual(erdos.numero_do('1'), 1)
+        self.assertEqual(erdos.numero_do('2'), 2)
+        self.assertEqual(erdos.numero_do('3'), 3)
+        self.assertEqual(erdos.numero_do('4'), 4)
+        self.assertEqual(erdos.numero_do('5'), 5)
+        self.assertEqual(erdos.numero_do('6'), 6)
+        self.assertEqual(erdos.numero_do('7'), 7)
+        self.assertEqual(erdos.numero_do('8'), 8)
+
+        novos_livros = [['2', '5']]
+        erdos.incluir_livros(novos_livros)
+        self.assertEqual(erdos.numero_do('Erdos'), 0)
+        self.assertEqual(erdos.numero_do('1'), 1)
+        self.assertEqual(erdos.numero_do('2'), 2)
+        self.assertEqual(erdos.numero_do('3'), 3)
+        self.assertEqual(erdos.numero_do('4'), 4)
+        self.assertEqual(erdos.numero_do('5'), 3)
+        self.assertEqual(erdos.numero_do('6'), 4)
+        self.assertEqual(erdos.numero_do('7'), 5)
+        self.assertEqual(erdos.numero_do('8'), 6)
+
+        novissimos_livros = [['Erdos', '4']]
+        erdos.incluir_livros(novissimos_livros)
+        self.assertEqual(erdos.numero_do('Erdos'), 0)
+        self.assertEqual(erdos.numero_do('1'), 1)
+        self.assertEqual(erdos.numero_do('2'), 2)
+        self.assertEqual(erdos.numero_do('3'), 2)
+        self.assertEqual(erdos.numero_do('4'), 1)
+        self.assertEqual(erdos.numero_do('5'), 2)
+        self.assertEqual(erdos.numero_do('6'), 3)
+        self.assertEqual(erdos.numero_do('7'), 4)
+        self.assertEqual(erdos.numero_do('8'), 5)
+
+        livros_mais_novos_ainda = [['3', '5', '8']]
+        erdos.incluir_livros(livros_mais_novos_ainda)
+        self.assertEqual(erdos.numero_do('Erdos'), 0)
+        self.assertEqual(erdos.numero_do('1'), 1)
+        self.assertEqual(erdos.numero_do('2'), 2)
+        self.assertEqual(erdos.numero_do('3'), 2)
+        self.assertEqual(erdos.numero_do('4'), 1)
+        self.assertEqual(erdos.numero_do('5'), 2)
+        self.assertEqual(erdos.numero_do('6'), 3)
+        self.assertEqual(erdos.numero_do('7'), 4)
+        self.assertEqual(erdos.numero_do('8'), 3)
+
+
 if __name__ == '__main__':
     unittest.main()

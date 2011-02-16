@@ -3,7 +3,7 @@ import sys
 INFINITO = sys.maxsize
 
 class No:
-    def __init__(self, nome, numero=None):
+    def __init__(self, nome, numero):
         self.co_autores = set()
         self.nome = nome
         self.numero = numero

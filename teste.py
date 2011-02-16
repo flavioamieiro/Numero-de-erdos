@@ -43,6 +43,16 @@ class TestErdos(unittest.TestCase):
         self.assertEqual(erdos.numero_do('Berrondo'), 1)
         self.assertEqual(erdos.numero_do('Flávio'), 2)
 
+    def test_coautor_de_Berrondo_eh_2_independente_da_ordem(self):
+        livros = [
+            ['Berrondo', 'Flávio'],
+            ['Erdos', 'Berrondo'],
+        ]
+        erdos = Erdos(livros)
+        self.assertEqual(erdos.numero_do('Erdos'), 0)
+        self.assertEqual(erdos.numero_do('Berrondo'), 1)
+        self.assertEqual(erdos.numero_do('Flávio'), 2)
+
 
 if __name__ == '__main__':
     unittest.main()

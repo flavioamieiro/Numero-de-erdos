@@ -18,6 +18,8 @@ class No:
             if no.nome != self.nome and self.numero != INFINITO:
                 no.pai = self
                 no.numero = self.numero + 1
+                no.co_autores.discard(self)
+                no.perfilhar_nos_em(no.co_autores)
 
     def __cmp__(self, other):
         if self.numero == other.numero:

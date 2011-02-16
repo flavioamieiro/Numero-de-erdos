@@ -1,3 +1,4 @@
+#-*- coding: utf-8 -*-
 import unittest
 from erdos import Erdos, INFINITO
 
@@ -31,6 +32,17 @@ class TestErdos(unittest.TestCase):
         erdos = Erdos(livros)
         self.assertEqual(erdos.numero_do('Erdos'), 0)
         self.assertEqual(erdos.numero_do('Berrondo'), 1)
+
+    def test_coautor_de_Berrondo_eh_2(self):
+        livros = [
+            ['Erdos', 'Berrondo'],
+            ['Berrondo', 'Flávio'],
+        ]
+        erdos = Erdos(livros)
+        self.assertEqual(erdos.numero_do('Erdos'), 0)
+        self.assertEqual(erdos.numero_do('Berrondo'), 1)
+        self.assertEqual(erdos.numero_do('Flávio'), 2)
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -6,14 +6,8 @@ class No:
     def __init__(self, nome, numero=None):
         self.co_autores = set()
         self.nome = nome
-        self._numero = numero
+        self.numero = numero
         self.pai = None
-
-    @property
-    def numero(self):
-        if self._numero is None:
-            self._numero = self.pai.numero + 1
-        return self._numero
 
     def update_co_autores(self, nos):
         self.co_autores.update(nos)
@@ -23,7 +17,7 @@ class No:
         for no in nos:
             if no.nome != self.nome and self.numero != INFINITO:
                 no.pai = self
-                no._numero = None
+                no.numero = self.numero + 1
 
     def __cmp__(self, other):
         if self.numero == other.numero:

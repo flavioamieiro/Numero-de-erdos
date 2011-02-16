@@ -16,13 +16,12 @@ class No:
 
     def perfilhar_nos_em(self, nos):
         for no in nos:
-            if no.nome != self.nome and \
-               self.numero != INFINITO and \
-               self.numero < no.numero:
+            if self.numero < no.numero:
+                # Eu estou mais perto de Erdos que o outro nó,
+                # sou o pai dele
                 no.pai = self
                 no.numero = self.numero + 1
-                autores_a_perfilhar = no.co_autores - set([self])
-                no.perfilhar_nos_em(autores_a_perfilhar)
+                no.perfilhar_nos_em(no.co_autores)
 
     def __cmp__(self, other):
         if self.numero == other.numero:

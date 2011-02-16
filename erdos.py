@@ -12,12 +12,7 @@ class No:
     @property
     def numero(self):
         if self._numero is None:
-            if self.nome == 'Erdos':
-                self._numero = 0
-            elif self.pai:
-                self._numero = self.pai.numero + 1
-            else:
-                self._numero = INFINITO
+            self._numero = self.pai.numero + 1
         return self._numero
 
     def update_co_autores(self, nos):

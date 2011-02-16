@@ -39,7 +39,9 @@ class Erdos(dict):
 
     def __init__(self, livros):
         self['Erdos'] = No('Erdos', 0)
+        self.incluir_livros(livros)
 
+    def incluir_livros(self, livros):
         for livro in livros:
             nos = list(map(lambda x: self.get(x, No(x, INFINITO)), livro))
             for no in nos:

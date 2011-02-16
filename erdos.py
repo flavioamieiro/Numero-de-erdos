@@ -15,11 +15,13 @@ class No:
 
     def perfilhar_nos_em(self, nos):
         for no in nos:
-            if no.nome != self.nome and self.numero != INFINITO:
+            if no.nome != self.nome and \
+               self.numero != INFINITO and \
+               self.numero < no.numero:
                 no.pai = self
                 no.numero = self.numero + 1
-                no.co_autores.discard(self)
-                no.perfilhar_nos_em(no.co_autores)
+                autores_a_perfilhar = no.co_autores - set([self])
+                no.perfilhar_nos_em(autores_a_perfilhar)
 
     def __cmp__(self, other):
         if self.numero == other.numero:

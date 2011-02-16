@@ -80,7 +80,27 @@ class TestErdos(unittest.TestCase):
         self.assertEqual(erdos.numero_do('C'), 4)
         self.assertEqual(erdos.numero_do('D'), 5)
 
+    def teste_promocao_intermediaria(self):
+        livros = [
+            ['Erdos', 'Berrondo'],
+            ['Berrondo', 'Flávio'],
+            ['Flávio', 'Magdalena'],
+            ['Magdalena', 'Luiza'],
+        ]
+        erdos = Erdos(livros)
+        self.assertEqual(erdos.numero_do('Erdos'), 0)
+        self.assertEqual(erdos.numero_do('Berrondo'), 1)
+        self.assertEqual(erdos.numero_do('Flávio'), 2)
+        self.assertEqual(erdos.numero_do('Magdalena'), 3)
+        self.assertEqual(erdos.numero_do('Luiza'), 4)
 
+        novos_livros = [['Erdos', 'Luiza']]
+        erdos.incluir_livros(novos_livros)
+        self.assertEqual(erdos.numero_do('Erdos'), 0)
+        self.assertEqual(erdos.numero_do('Berrondo'), 1)
+        self.assertEqual(erdos.numero_do('Flávio'), 2)
+        self.assertEqual(erdos.numero_do('Magdalena'), 2)
+        self.assertEqual(erdos.numero_do('Luiza'), 1)
 
 if __name__ == '__main__':
     unittest.main()

@@ -53,6 +53,34 @@ class TestErdos(unittest.TestCase):
         self.assertEqual(erdos.numero_do('Berrondo'), 1)
         self.assertEqual(erdos.numero_do('Flávio'), 2)
 
+    def teste_alguem_de_fora_escreve_com_alguem_de_dentro(self):
+        livros = [
+            ['A', 'B'],
+            ['B', 'C'],
+            ['C', 'D'],
+            ['Berrondo', 'Flávio'],
+            ['Erdos', 'Berrondo'],
+        ]
+        erdos = Erdos(livros)
+        self.assertEqual(erdos.numero_do('Erdos'), 0)
+        self.assertEqual(erdos.numero_do('Berrondo'), 1)
+        self.assertEqual(erdos.numero_do('Flávio'), 2)
+        self.assertEqual(erdos.numero_do('A'), INFINITO)
+        self.assertEqual(erdos.numero_do('B'), INFINITO)
+        self.assertEqual(erdos.numero_do('C'), INFINITO)
+        self.assertEqual(erdos.numero_do('D'), INFINITO)
+
+        novos_livros = [['B', 'Flávio']]
+        erdos.incluir_livros(novos_livros)
+        self.assertEqual(erdos.numero_do('Erdos'), 0)
+        self.assertEqual(erdos.numero_do('Berrondo'), 1)
+        self.assertEqual(erdos.numero_do('Flávio'), 2)
+        self.assertEqual(erdos.numero_do('A'), 4)
+        self.assertEqual(erdos.numero_do('B'), 3)
+        self.assertEqual(erdos.numero_do('C'), 4)
+        self.assertEqual(erdos.numero_do('D'), 5)
+
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -3,24 +3,24 @@ import sys
 
 INFINITO = sys.maxsize
 
-class No:
+class Autor:
     def __init__(self, nome, numero):
         self.co_autores = set()
         self.nome = nome
         self.numero = numero
 
-    def update_co_autores(self, nos):
-        self.co_autores.update(nos)
+    def update_co_autores(self, autores):
+        self.co_autores.update(autores)
         self.co_autores.discard(self)
 
-    def perfilhar_nos_em(self, nos):
-        for no in nos:
-            if self.numero < no.numero:
+    def perfilhar_autores_em(self, autores):
+        for autor in autores:
+            if self.numero < autor.numero:
                 # Eu estou mais perto de Erdos que o outro nó,
                 # tenho autoridade para determinar o número dele.
                 # Ele está na posição mais próxima possível de mim.
-                no.numero = self.numero + 1
-                no.perfilhar_nos_em(no.co_autores)
+                autor.numero = self.numero + 1
+                autor.perfilhar_autores_em(autor.co_autores)
 
     def __cmp__(self, other):
         if self.numero == other.numero:
@@ -39,17 +39,17 @@ class No:
 class Erdos(dict):
 
     def __init__(self, livros):
-        self['Erdos'] = No('Erdos', 0)
+        self['Erdos'] = Autor('Erdos', 0)
         self.incluir_livros(livros)
 
     def incluir_livros(self, livros):
         for livro in livros:
-            nos = [self.get(autor, No(autor, INFINITO)) for autor in  livro]
-            for no in nos:
-                no.update_co_autores(nos)
-                self[no.nome] = no
+            autores = [self.get(nome, Autor(nome, INFINITO)) for nome in livro]
+            for autor in autores:
+                autor.update_co_autores(autores)
+                self[autor.nome] = autor
 
-            min(nos).perfilhar_nos_em(nos)
+            min(autores).perfilhar_autores_em(autores)
 
     def numero_do(self, autor):
         return self[autor].numero

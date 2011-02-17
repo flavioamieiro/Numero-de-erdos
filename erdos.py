@@ -44,7 +44,7 @@ class Erdos(dict):
 
     def incluir_livros(self, livros):
         for livro in livros:
-            nos = list(map(lambda x: self.get(x, No(x, INFINITO)), livro))
+            nos = [self.get(autor, No(autor, INFINITO)) for autor in  livro]
             for no in nos:
                 no.update_co_autores(nos)
                 self[no.nome] = no

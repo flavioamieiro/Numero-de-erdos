@@ -4,7 +4,7 @@ import sys
 INFINITO = sys.maxsize
 
 class Autor:
-    def __init__(self, nome, numero):
+    def __init__(self, nome, numero=INFINITO):
         self.co_autores = set()
         self.nome = nome
         self.numero = numero
@@ -44,7 +44,7 @@ class Erdos(dict):
 
     def incluir_livros(self, livros):
         for livro in livros:
-            autores = [self.get(nome, Autor(nome, INFINITO)) for nome in livro]
+            autores = [self.get(nome, Autor(nome)) for nome in livro]
             for autor in autores:
                 autor.update_co_autores(autores)
                 self[autor.nome] = autor
